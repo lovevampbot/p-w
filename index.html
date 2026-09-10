@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>鹈鹕骑自行车</title>
+<style>
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#75d3ff}button{font:inherit}.scene{width:100%;height:100%;display:block}.cloud{animation:cloud 24s linear infinite}.cloud.c2{animation-delay:-12s;animation-duration:31s}.road-lines{animation:road .75s linear infinite}.wheel{transform-box:fill-box;transform-origin:center;animation:spin .95s linear infinite}.star{animation:twinkle 1.8s ease-in-out infinite alternate}.controls{position:fixed;z-index:20;right:20px;top:20px;padding:14px;background:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.75);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.17);backdrop-filter:blur(12px)}.controls strong{display:block;margin-bottom:10px;color:#183e50}.row{display:flex;align-items:center;gap:7px;margin-top:7px}.row span{width:42px;font-size:14px;font-weight:700}.controls button{padding:8px 11px;border:1px solid #bad4df;border-radius:9px;color:#214a5b;background:#edf8fc;font-weight:700;cursor:pointer}.controls button.active{color:#fff;background:#168dc3;border-color:#168dc3;box-shadow:0 4px 12px rgba(22,141,195,.3)}body.night .controls{color:#eef6ff;background:rgba(9,23,48,.82);border-color:#385274}body.night .controls strong{color:#eef6ff}body.night .controls button{color:#ddebff;background:#263d61;border-color:#526f99}body.night .controls button.active{color:#202536;background:#ffd55d;border-color:#ffd55d}@keyframes cloud{from{transform:translateX(-300px)}to{transform:translateX(1500px)}}@keyframes road{to{transform:translateX(-160px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes twinkle{from{opacity:.35}to{opacity:1}}@media(max-width:600px){.controls{top:8px;right:8px;padding:9px;transform:scale(.86);transform-origin:top right}.controls strong{display:none}}
+</style>
+</head>
+<body>
+<div class="controls">
+<strong>骑行控制</strong>
+<div class="row"><span>环境</span><button id="day" class="active">☀ 白天</button><button id="night">☾ 黑夜</button></div>
+<div class="row"><span>车灯</span><button id="lamp">开启车灯</button></div>
+</div>
+
+<svg class="scene" viewBox="0 0 1200 700" aria-label="鹈鹕骑自行车动画">
+<defs>
+ <linearGradient id="daySky" x2="0" y2="1"><stop stop-color="#68ceff"/><stop offset="1" stop-color="#edfaff"/></linearGradient>
+ <linearGradient id="nightSkyGradient" x2="0" y2="1"><stop stop-color="#061126"/><stop offset="1" stop-color="#18345b"/></linearGradient>
+ <linearGradient id="beam" x1="0" y1=".5" x2="1" y2=".5"><stop stop-color="#fff6a5" stop-opacity=".8"/><stop offset=".55" stop-color="#ffe86b" stop-opacity=".25"/><stop offset="1" stop-color="#ffe86b" stop-opacity="0"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#fff4a1" stop-opacity=".52"/><stop offset="1" stop-color="#fff4a1" stop-opacity="0"/></radialGradient>
+</defs>
+
+<!-- 环境背景 -->
+<rect width="1200" height="700" fill="url(#daySky)"/>
+<g id="dayWorld">
+ <circle cx="1035" cy="105" r="58" fill="#ffd84e"/><circle cx="1035" cy="105" r="82" fill="#ffe889" opacity=".22"/>
+ <g class="cloud"><g transform="translate(-170 125)" fill="#fff" opacity=".9"><ellipse cx="92" cy="39" rx="86" ry="31"/><circle cx="57" cy="24" r="37"/><circle cx="114" cy="17" r="46"/></g></g>
+ <g class="cloud c2"><g transform="translate(-230 250) scale(.7)" fill="#fff" opacity=".78"><ellipse cx="92" cy="39" rx="86" ry="31"/><circle cx="57" cy="24" r="37"/><circle cx="114" cy="17" r="46"/></g></g>
+</g>
+<g id="nightWorld" opacity="0" pointer-events="none">
+ <rect width="1200" height="525" fill="url(#nightSkyGradient)"/>
+ <g fill="#fff"><circle class="star" cx="85" cy="90" r="2.5"/><circle class="star" cx="168" cy="160" r="2"/><circle class="star" cx="258" cy="68" r="3"/><circle class="star" cx="355" cy="135" r="2"/><circle class="star" cx="446" cy="53" r="2.5"/><circle class="star" cx="543" cy="176" r="2"/><circle class="star" cx="647" cy="91" r="3"/><circle class="star" cx="741" cy="49" r="2"/><circle class="star" cx="837" cy="151" r="2.5"/><circle class="star" cx="932" cy="74" r="2"/><circle class="star" cx="1113" cy="164" r="3"/></g>
+ <circle cx="1035" cy="105" r="55" fill="#fff3cb"/><circle cx="1058" cy="85" r="55" fill="#09152d"/>
+</g>
+<path id="hills" d="M0 455Q170 380 340 445T690 430T1000 440T1200 405V530H0Z" fill="#73c65f"/>
+<rect id="road" y="520" width="1200" height="180" fill="#4b535b"/><rect y="520" width="1200" height="9" fill="#e8deb9"/>
+<g class="road-lines" stroke="#f7e45b" stroke-width="10" stroke-linecap="round"><path d="M-120 650h80M40 650h80M200 650h80M360 650h80M520 650h80M680 650h80M840 650h80M1000 650h80M1160 650h80"/></g>
+<text id="title" x="600" y="78" text-anchor="middle" font-size="43" font-weight="800" fill="#18506b" stroke="#fff" stroke-width="7" paint-order="stroke">鹈鹕骑行日</text>
+<ellipse cx="600" cy="607" rx="315" ry="18" fill="#111820" opacity=".24"/>
+
+<!-- 车灯光束位于自行车后方 -->
+<g id="lightBeam" opacity="0" pointer-events="none"><path d="M831 359L1200 414V572L831 373Z" fill="url(#beam)"/><ellipse cx="1048" cy="557" rx="205" ry="38" fill="url(#glow)"/></g>
+
+<!-- 后侧腿，车架遮挡它的一部分 -->
+<g id="backLayer" opacity=".68">
+ <line id="backCrank" stroke="#bd8722" stroke-width="8" stroke-linecap="round"/>
+ <line id="backPedal" stroke="#20272c" stroke-width="7" stroke-linecap="round"/>
+ <line id="backThigh" stroke="#c9841c" stroke-width="23" stroke-linecap="round"/>
+ <line id="backShin" stroke="#da9c27" stroke-width="18" stroke-linecap="round"/>
+ <circle id="backKnee" r="12" fill="#da9c27"/>
+ <line id="backFoot" stroke="#c9821a" stroke-width="14" stroke-linecap="round"/>
+</g>
+
+<!-- 自行车主体 -->
+<g id="bike">
+ <g class="wheel"><circle cx="350" cy="500" r="100" fill="#dff6ff" fill-opacity=".12" stroke="#20272c" stroke-width="13"/><g stroke="#aab7bd" stroke-width="3"><path d="M350 403v194M253 500h194M281 431l138 138M281 569l138-138"/></g><circle cx="350" cy="500" r="9" fill="#29343a"/></g>
+ <g class="wheel"><circle cx="830" cy="500" r="100" fill="#dff6ff" fill-opacity=".12" stroke="#20272c" stroke-width="13"/><g stroke="#aab7bd" stroke-width="3"><path d="M830 403v194M733 500h194M761 431l138 138M761 569l138-138"/></g><circle cx="830" cy="500" r="9" fill="#29343a"/></g>
+ <g fill="none" stroke="#df4037" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><path d="M350 500L510 500L458 360L350 500M458 360L655 500L510 500M655 500L782 350"/></g>
+ <path d="M782 350L830 500" stroke="#344149" stroke-width="10"/>
+ <path d="M782 350L765 307L820 303M797 303l24 24" fill="none" stroke="#344149" stroke-width="10" stroke-linecap="round"/>
+ <path d="M458 360l-10-23" stroke="#344149" stroke-width="9"/>
+ <path d="M407 341Q447 327 490 341" fill="none" stroke="#253039" stroke-width="18" stroke-linecap="round"/>
+ <path d="M350 493L510 482Q528 500 510 518L350 507" fill="none" stroke="#283239" stroke-width="4"/>
+ <circle cx="510" cy="500" r="25" fill="#f3bf2f" stroke="#293239" stroke-width="5"/><circle cx="510" cy="500" r="7" fill="#293239"/>
+</g>
+
+<!-- 鹈鹕身体，臀部固定在坐垫上 -->
+<g id="pelicanBody">
+ <path d="M420 294Q365 311 326 353Q381 358 435 341Z" fill="#dad5bc" stroke="#c3bea6" stroke-width="4"/>
+ <ellipse cx="478" cy="282" rx="105" ry="72" transform="rotate(10 478 282)" fill="#f5f1dc" stroke="#cec8ad" stroke-width="5"/>
+ <path d="M421 259Q381 294 418 339Q475 326 512 278Q469 251 421 259Z" fill="#d4d0b8" stroke="#bdb8a1" stroke-width="5"/>
+ <path d="M516 292Q545 220 590 190Q620 170 654 197Q625 220 616 266Q607 312 566 332Z" fill="#fffbed" stroke="#d5d0b7" stroke-width="5"/>
+ <ellipse cx="650" cy="181" rx="61" ry="49" transform="rotate(8 650 181)" fill="#fffbed" stroke="#d5d0b7" stroke-width="5"/>
+ <circle cx="676" cy="169" r="11" fill="#fff"/><circle cx="678" cy="170" r="6" fill="#172027"/><circle cx="680" cy="168" r="2" fill="#fff"/>
+ <path d="M698 182Q790 177 831 197Q780 215 694 207Z" fill="#ec9d27" stroke="#cc8016" stroke-width="4"/>
+ <path d="M618 207Q704 214 807 204Q782 259 677 253Q632 250 618 207Z" fill="#f5b840" stroke="#d8931f" stroke-width="4"/>
+ <line x1="514" y1="278" x2="638" y2="318" stroke="#e8e2cb" stroke-width="30" stroke-linecap="round"/>
+ <line x1="638" y1="318" x2="791" y2="309" stroke="#f5f0dc" stroke-width="23" stroke-linecap="round"/>
+ <circle cx="793" cy="309" r="14" fill="#edb23a"/>
+</g>
+
+<!-- 前侧腿位于车架前方 -->
+<g id="frontLayer">
+ <line id="frontCrank" stroke="#efb82d" stroke-width="9" stroke-linecap="round"/>
+ <line id="frontPedal" stroke="#252d32" stroke-width="10" stroke-linecap="round"/>
+ <line id="frontThigh" stroke="#efa92a" stroke-width="28" stroke-linecap="round"/>
+ <line id="frontShin" stroke="#f2b53b" stroke-width="22" stroke-linecap="round"/>
+ <circle id="frontKnee" r="15" fill="#f2b53b"/>
+ <line id="frontFoot" stroke="#e99c24" stroke-width="16" stroke-linecap="round"/>
+</g>
+
+<!-- 前灯灯体位于最上层 -->
+<g id="bikeLamp"><path d="M788 336l22 20" stroke="#303940" stroke-width="7" stroke-linecap="round"/><g transform="translate(815 359) rotate(13)"><rect x="-18" y="-16" width="35" height="32" rx="8" fill="#303940" stroke="#151b1f" stroke-width="4"/><ellipse id="lampLens" cx="17" cy="0" rx="9" ry="13" fill="#b7c2c7" stroke="#222a2f" stroke-width="3"/></g></g>
+</svg>
+
+<script>
+const C={x:510,y:500},R=54,hipF={x:473,y:325},hipB={x:450,y:321};
+function line(id,a,b){const e=document.getElementById(id);e.setAttribute('x1',a.x);e.setAttribute('y1',a.y);e.setAttribute('x2',b.x);e.setAttribute('y2',b.y)}
+function circle(id,p){const e=document.getElementById(id);e.setAttribute('cx',p.x);e.setAttribute('cy',p.y)}
+function getKnee(hip,foot,upper,lower,side){let dx=foot.x-hip.x,dy=foot.y-hip.y,d=Math.max(1,Math.hypot(dx,dy));d=Math.min(d,upper+lower-.1);const a=(upper*upper-lower*lower+d*d)/(2*d),h=Math.sqrt(Math.max(0,upper*upper-a*a)),ux=dx/d,uy=dy/d;return{x:hip.x+a*ux-uy*h*side,y:hip.y+a*uy+ux*h*side}}
+function updateLeg(prefix,hip,pedal,angle,side){const k=getKnee(hip,pedal,104,113,side);line(prefix+'Thigh',hip,k);line(prefix+'Shin',k,pedal);circle(prefix+'Knee',k);const tilt=Math.sin(angle)*.14,L=43,dx=Math.cos(tilt)*L,dy=Math.sin(tilt)*L;line(prefix+'Foot',{x:pedal.x-dx*.28,y:pedal.y-dy*.28},{x:pedal.x+dx*.72,y:pedal.y+dy*.72})}
+function animate(t){const a=t*.0046,b=a+Math.PI,pf={x:C.x+Math.cos(a)*R,y:C.y+Math.sin(a)*R},pb={x:C.x+Math.cos(b)*R,y:C.y+Math.sin(b)*R};line('frontCrank',C,pf);line('backCrank',C,pb);line('frontPedal',{x:pf.x-17,y:pf.y+5},{x:pf.x+30,y:pf.y+5});line('backPedal',{x:pb.x-27,y:pb.y-5},{x:pb.x+14,y:pb.y-5});updateLeg('back',hipB,pb,b,-.72);updateLeg('front',hipF,pf,a,.88);const bob=Math.sin(a*2)*.6,lean=-5+Math.sin(a*2)*.22;document.getElementById('pelicanBody').setAttribute('transform',`translate(0 ${bob}) rotate(${lean} 447 338)`);requestAnimationFrame(animate)}
+requestAnimationFrame(animate);
+
+const dayButton=document.getElementById('day'),nightButton=document.getElementById('night'),lampButton=document.getElementById('lamp'),nightWorld=document.getElementById('nightWorld'),dayWorld=document.getElementById('dayWorld'),beam=document.getElementById('lightBeam'),lens=document.getElementById('lampLens'),hills=document.getElementById('hills'),road=document.getElementById('road'),title=document.getElementById('title');
+let lightOn=false;
+function updateLamp(){beam.style.transition='opacity .3s ease';lens.style.transition='fill .3s ease,filter .3s ease';beam.setAttribute('opacity',lightOn?'1':'0');lens.setAttribute('fill',lightOn?'#fff59a':'#b7c2c7');lens.style.filter=lightOn?'drop-shadow(0 0 10px #fff179)':'none';lampButton.textContent=lightOn?'关闭车灯':'开启车灯';lampButton.classList.toggle('active',lightOn);lampButton.setAttribute('aria-pressed',String(lightOn))}
+function setMode(mode){const isNight=mode==='night';document.body.classList.toggle('night',isNight);nightWorld.style.transition='opacity .7s ease';dayWorld.style.transition='opacity .7s ease';nightWorld.setAttribute('opacity',isNight?'1':'0');dayWorld.setAttribute('opacity',isNight?'.12':'1');hills.setAttribute('fill',isNight?'#173f38':'#73c65f');road.setAttribute('fill',isNight?'#252d38':'#4b535b');title.setAttribute('fill',isNight?'#ddecff':'#18506b');dayButton.classList.toggle('active',!isNight);nightButton.classList.toggle('active',isNight);lightOn=isNight;updateLamp()}
+dayButton.addEventListener('click',()=>setMode('day'));nightButton.addEventListener('click',()=>setMode('night'));lampButton.addEventListener('click',()=>{lightOn=!lightOn;updateLamp()});setMode('day');
+</script>
+</body>
+</html>
